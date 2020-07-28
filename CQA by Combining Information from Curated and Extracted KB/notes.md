@@ -65,7 +65,7 @@
   - 不然的话（就是 join 操作？）继续从 $G_i$ 中不重叠的实体关系继续推导。
   - 那这里是说的通的，join 操作要求有实体重叠，也就是关系间有共享的实体，这里就自然地实体重叠了。同样，它没有明说下一步是 simQA 还是 join，应该是一起做的搜索过程。而程序并不关心到底是 simQA 或是 join
 
-####Semanic Matching
+####Semantic Matching
 
 接下来本文将描述使用到神经网络模型，用于匹配不同种知识图谱上关系到自然语言问题的相似度。
 
@@ -77,7 +77,7 @@
   - 学习 textual 的 embedding，并将他们做一个clustering 以规范化
   - 用规范化的 textual 来和 ontological 的关系进行匹配。匹配的标准即为关系重叠了多少个相同的 头尾 节点。
     - 比如 is author of - book.author 关系一定比 is author of - education.institution 重叠的关系多。
-  - 避免巧合的匹配，要求设一个阈值为共享关系数量的最小值才能对齐它们为同一个关系。
+  - 避免巧合的匹配，要求设一个阈值为重叠关系数量的最小值才能对齐它们为同一个关系。
 
 - 主路径编码：
   对于每种对齐关系，学习每个关系的潜在向量表示（textual）:
@@ -105,7 +105,7 @@
 
 这个有前人的工作完成。
 
-然后对于这棵树，每个level (partial query)，使用 beam search (也就是每次暴力搜索，保存最好的k个的一种贪心算法，但拥有更大的搜索空间) 找到最好的候选者。但如果仅仅使用 semanic matching model 又很单调，于是引入更多的部分来判断当前状态的合理性：
+然后对于这棵树，每个level (partial query)，使用 beam search (也就是每次暴力搜索，保存最好的k个的一种贪心算法，但拥有更大的搜索空间) 找到最好的候选者。但如果仅仅使用 semantic matching model 又很单调，于是引入更多的部分来判断当前状态的合理性：
 
 语法相似度，entity linking scores，约束数量，变量节点数量，关系数量和答案实体数量。
 
